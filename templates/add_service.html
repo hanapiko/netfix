@@ -1,0 +1,11 @@
+{% extends './layouts/main.html' %}
+{% block content %}
+<main>
+  <form action="{% url 'add_service' %}" method="post" class="add_service">
+    <h1 class="heading">Add Service</h1>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create" />
+  </form>
+</main>
+{% endblock %}
