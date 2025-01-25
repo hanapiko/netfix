@@ -1,0 +1,42 @@
+{% extends './layouts/main.html' %}
+{% block content %}
+<aside>
+  <h1 class="profile">Profile Page</h1>
+  {% if user.field_of_work == 'CUSTOMER' %}
+    <div class="profile_infos">
+      <p>Name: {{ user.username|slice:':98'|truncatechars:100 }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Activity: {{ user.field_of_work }}</p>
+      <p>Date of birth: {{ user.date_of_birth }}</p>
+    </div>
+  {% else %}
+    <div class="profile_infos">
+      <p>Company: {{ user.username|slice:':98'|truncatechars:100 }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Activity: {{ user.field_of_work }}</p>
+      <p>Date of registration: {{ user.date_of_birth }}</p>
+    </div>
+  {% endif %}
+</aside>
+  <main>
+  {% if user.field_of_work == 'CUSTOMER' %}
+    <h2>Booked services:</h2>
+
+    {% for item in history %}
+      {% include './widgets/one_booking_card.html' %}
+    {% endfor %}
+  {% else %}
+    <form action="{% url 'add_service' %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="Add a service" class="service_button" />
+    </form>
+
+      <h2>Created services:</h2>
+      <div class="job-grid">
+        {% for item in history %}
+          {% include './widgets/one_service_card.html' %}
+        {% endfor %}
+      </div>
+  {% endif %}
+  </main>
+{% endblock %}
