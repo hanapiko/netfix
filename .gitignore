@@ -1,0 +1,27 @@
+# Python
+*.py[cod]
+__pycache__/
+*.so
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media
+
+# Virtual Environment
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local development settings
+local_settings.py
+
+# Environment variables
+.env 
