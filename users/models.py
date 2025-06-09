@@ -12,9 +12,7 @@ class User(AbstractUser):
 class Customer(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
-    address = models.CharField(max_length=200, blank=True)
-    phone_number = models.CharField(max_length=20, blank=True)
-    birth = models.DateField(null=True, blank=True)
+    birth = models.DateField(blank=False, null=False)
 
     def __str__(self):
         return str(self.user.id) + ' - ' + self.user.username
