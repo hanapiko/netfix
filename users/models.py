@@ -15,7 +15,7 @@ class Customer(models.Model):
     birth = models.DateField(blank=False, null=False)
 
     def __str__(self):
-        return str(self.user.id) + ' - ' + self.user.username
+        return f'{self.user.id} - {self.user.username}'
 
 
 class Company(models.Model):
