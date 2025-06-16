@@ -43,7 +43,7 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-5. Desactivate the virtual environment
+5. Deactivate the virtual environment
 
 - On macOS and Linux:
 
