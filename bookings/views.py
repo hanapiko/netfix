@@ -23,8 +23,8 @@ def booking_view(request, service_id):
             # Assign the logged-in user (redundant here but still ensures accuracy)
             booking.user = request.user
 
-            # Calculate the booking price: service price per hour * number of hours submitted
-            booking.price = service.price_per_hour * int(request.POST['hours'])
+            # Calculate the booking price using validated form data
+            booking.price = service.price_per_hour * form.cleaned_data['hours']
             
             # Optional: Print the calculated price to the console (useful for debugging)
             print(booking.price)
