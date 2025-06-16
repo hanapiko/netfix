@@ -1,8 +1,12 @@
+import logging
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from bookings.models import Bookings
 from service.models import Service
 from .forms import BookingForm
+
+# Initialize a logger for this module
+logger = logging.getLogger(__name__)
 
 # View to handle booking a specific service
 def booking_view(request, service_id):
@@ -26,8 +30,8 @@ def booking_view(request, service_id):
             # Calculate the booking price using validated form data
             booking.price = service.price_per_hour * form.cleaned_data['hours']
             
-            # Optional: Print the calculated price to the console (useful for debugging)
-            print(booking.price)
+            # Log the calculated price for debugging purposes
+            logger.debug(f"Calculated booking price: {booking.price}")
 
             # Save the booking to the database
             booking.save()
