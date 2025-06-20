@@ -1,0 +1,13 @@
+{% extends './layouts/main.html' %}
+{% block content %}
+  <aside>
+    <img src="/static/img/banner.jpg" alt="" class="cover" />
+  </aside>
+  <main>
+    <h1>Register new company</h1>
+    <form action="/register_company/" method="POST">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Register</button>
+    </form>
+  </main>
+{% endblock %}

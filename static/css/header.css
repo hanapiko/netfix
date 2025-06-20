@@ -1,0 +1,71 @@
+.logo {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	font-size: 25px;
+	cursor: pointer;
+	text-decoration: none;
+	color: inherit;
+}
+
+.logo svg {
+	width: 24px;
+	margin-right: 5px;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	transition: box-shadow 0.3s;
+	flex-shrink: 0;
+	padding: 0 40px;
+	white-space: nowrap;
+	background-color: var(--header-bg-color);
+	height: 60px;
+	width: 100%;
+	border-radius: 15px;
+	grid-column: 1 / -1;
+	font-size: 14px;
+	justify-content: space-between;
+}
+
+nav a {
+	text-decoration: none;
+	color: var(--body-color);
+	font-weight: 500;
+}
+
+nav a:hover {
+	color: var(--active-color);
+}
+
+nav a:not(:first-child) {
+	margin-left: 30px;
+}
+
+nav a.active {
+	color: var(--active-color);
+}
+
+.user-settings {
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+}
+
+.user-settings svg {
+	width: 20px;
+	color: #94949f;
+}
+
+.avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	-o-object-fit: cover;
+	object-fit: cover;
+}
+
+.user-name {
+	margin: 0 10px;
+}
