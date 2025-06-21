@@ -1,34 +1,21 @@
 from django.db import models
 
-# Create your models here.
-from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
-from users.models import Company, Customer
+from main.models import ACTIVITY_CHOICES, AppUser
 
 
 class Service(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    name = models.CharField(max_length=40)
-    description = models.TextField()
-    price_hour = models.DecimalField(decimal_places=2, max_digits=100)
-    rating = models.IntegerField(validators=[MinValueValidator(
-        0), MaxValueValidator(5)], default=0)
-    choices = (
-        ('Air Conditioner', 'Air Conditioner'),
-        ('Carpentry', 'Carpentry'),
-        ('Electricity', 'Electricity'),
-        ('Gardening', 'Gardening'),
-        ('Home Machines', 'Home Machines'),
-        ('House Keeping', 'House Keeping'),
-        ('Interior Design', 'Interior Design'),
-        ('Locks', 'Locks'),
-        ('Painting', 'Painting'),
-        ('Plumbing', 'Plumbing'),
-        ('Water Heaters', 'Water Heaters'),
+    name = models.CharField(max_length=254)
+    description = models.TextField(max_length=500)
+    field = models.CharField(
+        max_length=50,
+        choices=[
+            (x, y) for x, y in ACTIVITY_CHOICES if x not in ['ALL_IN_ONE', 'CUSTOMER']
+        ]
     )
-    field = models.CharField(max_length=30, blank=False,
-                             null=False, choices=choices)
-    date = models.DateTimeField(auto_now=True, null=False)
+    price_per_hour = models.DecimalField(max_digits=100, decimal_places=2)
+    created_date = models.DateTimeField(auto_now_add=True)
+    company_username = models.ForeignKey(
+        AppUser, on_delete=models.CASCADE, to_field='username', limit_choices_to={'field_of_work__ne': 'CUSTOMER'})
 
     def __str__(self):
         return self.name
