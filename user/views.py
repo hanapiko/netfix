@@ -1,44 +1,49 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from django.views.generic import CreateView, TemplateView
+from django.shortcuts import render
+from main.models import AppUser
+from main.views import convert_bookings_choices_to_verbose_names, convert_services_choices_to_verbose_names, convert_one_choice_to_verbose_name
 
-from .forms import CustomerSignUpForm, CompanySignUpForm, UserLoginForm
-from .models import User, Company, Customer
-
-
-def register(request):
-    return render(request, 'users/register.html')
+from bookings.models import Bookings
+from service.models import Service
 
 
-class CustomerSignUpView(CreateView):
-    model = User
-    form_class = CustomerSignUpForm
-    template_name = 'users/register_customer.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'customer'
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('/')
-
-
-class CompanySignUpView(CreateView):
-    model = User
-    form_class = CompanySignUpForm
-    template_name = 'users/register_company.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'company'
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('/')
+def profile(request):
+    history = None
+    if request.user.field_of_work == 'CUSTOMER':
+        history = Bookings.objects.filter(
+            user=request.user).order_by('-booking_date')
+        convert_bookings_choices_to_verbose_names(history)
+    else:
+        history = Service.objects.filter(
+            company_username=request.user).order_by('-created_date')
+        convert_services_choices_to_verbose_names(history)
+    request.user.field_of_work = convert_one_choice_to_verbose_name(
+        request.user.field_of_work)
+    context = {
+        'user': request.user,
+        'history': history,
+    }
+    return render(request, 'profile.html', context)
 
 
-def LoginUserView(request):
-    pass
+def public_profile(request, username):
+    user = AppUser.objects.get(username=username)
+    user.field_of_work = convert_one_choice_to_verbose_name(user.field_of_work)
+    history = None
+    if user.field_of_work == 'CUSTOMER':
+        # at the moment this never fires with normal site usage,
+        # because only the company has links to a public profile
+        # but for the emergency case, it can prevent potential issues
+        history = Bookings.objects.filter(
+            user=user).order_by('-booking_date')
+    else:
+        history = Service.objects.filter(
+            company_username=user).order_by('-created_date')
+        convert_services_choices_to_verbose_names(history)
+    context = {
+        # to manage navbar.html properly
+        'user': request.user,
+        # to show public user's profile, and choose history section of template
+        'public_user': user,
+        'history': history,
+    }
+    return render(request, 'public_profile.html', context)
