@@ -22,11 +22,12 @@ class ServiceForm(ModelForm):
         # if user.field_of_work != 'ALL_IN_ONE':
         #     del self.fields['field']
 
-        # wtf, these idiots from 01-edu in audit questions require
-        # add the field of choice of one variant. Also they ban me on github
-        # after i made review of their brown substance named "graphql",
-        # in attempts to hide this shame from the readers.
-        # So i cant make issues, and ... here is it, sniff it carefully
+        # As per audit requirements from 01-edu, the field must allow
+        # the choice of a single variant. Note that feedback regarding
+        # their implementation of "graphql" was not accepted, and issues
+        # could not be raised on their GitHub repository.
+        # This implementation addresses the requirement while adhering
+        # to the constraints provided.
 
         if user.field_of_work != 'ALL_IN_ONE':
             self.fields['field'].choices = [
