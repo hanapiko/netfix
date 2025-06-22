@@ -12,6 +12,7 @@ media
 
 # Virtual Environment
 ENV/
+venv/
 
 # IDE
 .idea/
