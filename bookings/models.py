@@ -1,7 +1,7 @@
 from django.db import models
 from django.forms import ValidationError
 from main.models import AppUser
-from services.models import Service
+from service.models import Service
 from datetime import datetime
 
 # Model representing a booking made by a user for a specific service
