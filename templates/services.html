@@ -1,13 +1,20 @@
-{% extends './layouts/main.html' %}
-{% block content %}
-  <aside>
-    <img src="/static/img/banner.jpg" alt="" class="cover" />
-  </aside>
-  <main>
-    <div class="job-grid">
-      {% for item in services %}
-        {% include './widgets/one_service_card.html' %}
-      {% endfor %}
-    </div>
-  </main>
+{% extends './layouts/main.html' %} {% block content %}
+<aside>
+	<img
+		src="/static/img/banner.jpg"
+		alt=""
+		class="cover"
+	/>
+</aside>
+<main>
+	{% if category %}
+	<h1>{{ category }} Services</h1>
+	{% else %}
+	<h1>All Services</h1>
+	{% endif %}
+	<div class="job-grid">
+		{% for item in services %} {% include './widgets/one_service_card.html' %}
+		{% endfor %}
+	</div>
+</main>
 {% endblock %}
