@@ -58,11 +58,25 @@ pip install django
 <!-- pip install -r requirements.txt -->
 ```
 
-7. Apply database migrations:
+7. **Quick Setup (Recommended)**: Run the setup script to create database and sample services:
+
+```
+python3 setup_project.py
+```
+
+**OR Manual Setup**:
+
+7a. Apply database migrations:
 
 ```
 python3 manage.py makemigrations
 python3 manage.py migrate
+```
+
+7b. Create sample services (optional but recommended):
+
+```
+python3 manage.py create_sample_services
 ```
 
 8. Create a superuser account to access the admin panel:
@@ -78,6 +92,26 @@ python3 manage.py runserver
 ```
 
 10. Access the application in your web browser at `http://127.0.0.1:8000/`.
+
+## SAMPLE DATA
+The project includes a management command to create sample services for testing:
+
+### Available Commands:
+- `make sample-services` - Create sample services (safe, won't duplicate)
+- `make sample-services-clear` - Clear existing services and create new ones
+- `python3 manage.py create_sample_services` - Direct command
+- `python3 manage.py create_sample_services --clear` - Direct command with clear option
+
+### Sample Services Created:
+- **Plumbing**: Emergency Pipe Repair ($45/hr)
+- **Electrical**: Home Electrical Wiring ($60/hr)
+- **Gardening**: Garden Design & Landscaping ($35/hr)
+
+### Sample Company Accounts:
+All sample companies use password: `defaultpass123`
+- quickfix_plumbing@quickfixplumbing.com (Plumbing services)
+- info@sparkleelectric.com (Electrical services)
+- hello@greengardens.com (Gardening services)
 
 ## FEATURES
 - [x] User registration and login (both Company and Customer)
