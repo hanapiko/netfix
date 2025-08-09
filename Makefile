@@ -1,4 +1,4 @@
-start: migrate
+start: migrate sample-services
 	python3 manage.py runserver
 
 migrate:
@@ -7,6 +7,12 @@ migrate:
 
 admin:
 	python3 manage.py createsuperuser
+
+sample-services:
+	python3 manage.py create_sample_services
+
+sample-services-clear:
+	python3 manage.py create_sample_services --clear
 
 create-app:
 	python3 manage.py startapp your_app_name
@@ -44,4 +50,4 @@ push:
 	git commit -m "$(Message)"
 	git push
 
-.PHONY: start migrate admin create-app test lint shell collectstatic makemessages compilemessages backup-db restore-db push
+.PHONY: start migrate admin sample-services sample-services-clear create-app test lint shell collectstatic makemessages compilemessages backup-db restore-db push
