@@ -3,11 +3,13 @@
 	background-color: var(--header-bg-color);
 	border-radius: 8px;
 	cursor: pointer;
-	transition: 0.2s;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .job-card:hover {
-	transform: scale(1.02);
+	transform: translateY(-4px) scale(1.02);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .job-card svg {
@@ -39,6 +41,15 @@
 	font-weight: 500;
 	padding: 6px 8px;
 	border-radius: 4px;
+	transition: all 0.2s ease;
+	cursor: pointer;
+	border: none;
+}
+
+.detail-button:hover {
+	background-color: var(--active-color);
+	color: var(--button-color);
+	transform: scale(1.05);
 }
 
 .detail-button + .detail-button {
@@ -59,15 +70,29 @@
 	width: 100%;
 	font-size: 12px;
 	cursor: pointer;
+	transition: all 0.2s ease;
+	text-decoration: none;
+	border-radius: 6px;
 }
 
 .card-buttons {
 	margin-right: 12px;
 }
 
+.card-buttons:hover {
+	background-color: var(--active-color);
+	color: var(--button-color);
+	transform: translateY(-1px);
+}
+
 .card-buttons-msg {
 	background-color: var(--inactive-color);
 	color: var(--subtitle-color);
+}
+
+.card-buttons-msg:hover {
+	background-color: var(--border-color);
+	color: var(--body-color);
 }
 
 .price {

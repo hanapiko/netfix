@@ -54,8 +54,7 @@ deactivate
 6. Install the required dependencies:
 
 ```
-pip install django
-<!-- pip install -r requirements.txt -->
+pip install -r requirements.txt
 ```
 
 7. Apply database migrations:
@@ -79,6 +78,31 @@ python3 manage.py runserver
 
 10. Access the application in your web browser at `http://127.0.0.1:8000/`.
 
+## SAMPLE DATA
+The project includes a management command to create sample services and users for testing:
+
+### Available Commands:
+- `make sample-services` - Create sample services and users (safe, won't duplicate)
+- `make sample-services-clear` - Clear existing services and create new ones
+- `python3 manage.py create_sample_services` - Direct command
+- `python3 manage.py create_sample_services --clear` - Direct command with clear option
+
+### Sample Services Created:
+- **Emergency Pipe Repair** ($45/hr) - Plumbing service
+- **Home Electrical Wiring** ($60/hr) - Electrical service
+- **Ceiling Fan Installation** ($40/hr) - Electrical service
+
+### Sample Users Created:
+**Company Accounts (can create services):**
+- quickfixplumbing@gmail.com (Plumbing company)
+- sparkleelectric@gmail.com (Electrical company)
+
+**Customer Accounts (can book services):**
+- johndoe@gmail.com (Regular customer)
+- marysmith@gmail.com (Regular customer)
+
+**All sample accounts use password:** `defaultpass123`
+
 ## FEATURES
 - [x] User registration and login (both Company and Customer)
 - [x] User profile pages displaying information and requested services
@@ -89,6 +113,7 @@ python3 manage.py runserver
 - [x] Most requested services page
 - [x] Proper error handling and status pages
 - [x] HTTPS secure connection
+- [x] Django Admin panel for data management
 - [ ] Rate limiting to prevent abuse
 - [x] Encryption of client passwords and sessions
 

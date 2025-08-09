@@ -7,3 +7,39 @@ form > div {
 	flex-direction: column;
 	margin-bottom: 16px;
 }
+
+/* Form validation styling */
+input:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+	border: 2px solid var(--active-color);
+	box-shadow: 0 0 0 3px var(--active-light-color);
+}
+
+input:invalid,
+textarea:invalid,
+select:invalid {
+	border: 2px solid #e74c3c;
+	background-color: rgba(231, 76, 60, 0.1);
+}
+
+input:valid,
+textarea:valid,
+select:valid {
+	border: 2px solid #27ae60;
+}
+
+.error-message {
+	color: #e74c3c;
+	font-size: 12px;
+	margin-top: 4px;
+	display: block;
+}
+
+.success-message {
+	color: #27ae60;
+	font-size: 12px;
+	margin-top: 4px;
+	display: block;
+}

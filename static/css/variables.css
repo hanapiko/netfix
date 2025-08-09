@@ -89,6 +89,17 @@ button {
 	border-radius: 6px;
 	font-size: 13px;
 	font-weight: 600;
+	transition: all 0.2s ease;
+	cursor: pointer;
+}
+
+.btn:hover,
+input[type="submit"]:hover,
+button:hover {
+	background-color: var(--active-color);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	filter: brightness(1.1);
 }
 
 form p {
