@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from service.models import Service
-from main.models import ACTIVITY_CHOICES
 from decimal import Decimal
 
 User = get_user_model()
