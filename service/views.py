@@ -37,12 +37,26 @@ def service_view(request, service_id):
     return render(request, 'one_service.html', context)
 
 
-def service_list_view(request):
+def service_list_view(request, category=None):
     # list of services sorted by number of bookings, first the most popular.
     # For the same number of bookings, sorting by latest booking first.
     services = Service.objects.annotate(
         num_bookings=Count('bookings'),
         latest_booking_date=Max('bookings__booking_date')
-    ).order_by('-num_bookings', '-latest_booking_date')
+    )
+    
+    # Filter by category if provided
+    if category:
+        services = services.filter(field=category)
+    
+    services = services.order_by('-num_bookings', '-latest_booking_date')
     convert_services_choices_to_verbose_names(services)
-    return render(request, 'services.html', {'services': services})
+    
+    context = {'services': services}
+    if category:
+        # Get the verbose name for the category
+        from main.models import ACTIVITY_CHOICES
+        category_verbose = dict(ACTIVITY_CHOICES).get(category, category)
+        context['category'] = category_verbose
+    
+    return render(request, 'services.html', context)
